@@ -1,0 +1,12 @@
+{application, hydrogen,
+ [
+  {description, ""},
+  {vsn, "0.1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { hydrogen_app, []}},
+  {env, []}
+ ]}.
