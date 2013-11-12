@@ -23,7 +23,7 @@ insert(List, {Key, Value}) ->
 
 -spec append(list(), {any(), any()}) -> list().
 append(List, {Key, Value}) ->
-    List ++ [{Key, Value}].
+    lists:reverse([{Key, Value} | lists:reverse(List)]).
 
 -spec update(list(), {any(), any()}) -> list().
 update(List, {Key, Value}) ->
