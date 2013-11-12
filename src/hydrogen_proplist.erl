@@ -43,11 +43,11 @@ delete_all(List, Key) ->
 
 -spec get(list(), any()) -> any().
 get(List, Key) ->
-    proplists:get_value(List, Key).
+    proplists:get_value(Key, List).
 
 -spec get(list(), any(), any()) -> any().
 get(List, Key, Default) ->
-    proplists:get_value(List, Key, Default).
+    proplists:get_value(Key, List, Default).
 
 -spec get_all(list(), any()) -> list().
 get_all(List, Key) ->
