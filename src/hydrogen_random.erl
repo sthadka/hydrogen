@@ -22,14 +22,16 @@ shuffle(List) ->
     ShuffledList.
 
 %% @doc Pick a random element from given list
--spec pick(list()) -> list().
+-spec pick([] | list()) -> undefined | any().
 pick([]) ->
     undefined;
 pick(List) ->
     hd(sample(1, List)).
 
 %% @doc Return a random sample of N elements from a given list
--spec sample(pos_integer(), list()) -> list().
+-spec sample(pos_integer(), list()) -> undefined | list().
+sample(_N, []) ->
+    undefined;
 sample(1, [E]) ->
     [E];
 sample(1, List) ->

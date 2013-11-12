@@ -25,13 +25,14 @@ to_atom(L) when is_list(L) ->
 to_atom(B) when is_binary(B) ->
     to_atom(B, utf8).
 
--spec to_atom(atom() | list() | binary(), atom()) -> atom().
+-spec to_atom(atom() | nonempty_string() | binary(), atom()) -> atom().
 to_atom(B, Encoding) when is_binary(B) ->
     ?B2A(B, Encoding);
 to_atom(Other, _Encoding) ->
     to_atom(Other).
 
--spec to_existing_atom(atom() | list() | binary()) -> atom().
+-spec to_existing_atom(atom() | nonempty_string() | binary()) ->
+    atom() | no_return().
 to_existing_atom(A) when is_atom(A) ->
     A;
 to_existing_atom(L) when is_list(L) ->
@@ -82,7 +83,7 @@ to_list(A) when is_atom(A)    -> ?A2L(A);
 to_list(I) when is_integer(I) -> ?I2L(I);
 to_list(F) when is_float(F)   -> ?B2L(?F2B(F)).
 
--spec to_float(float() | binary() | integer() | list()) -> float().
+-spec to_float(float() | binary() | integer() | [integer()] ) -> float().
 to_float(F) when is_float(F) ->
     F;
 to_float(B) when is_binary(B) ->
