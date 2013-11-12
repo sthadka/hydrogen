@@ -1,5 +1,5 @@
 %%%-------------------------------------------------------------------
-%%% @doc hydrogen proplist
+%%% @doc hydrogen_proplist
 %%%
 %%% Wrapper for proplists
 %%% @end
