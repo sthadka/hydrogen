@@ -9,7 +9,7 @@
 
 -include_lib("hydrogen.hrl").
 
--export([url_encode/1, hexchr_encode/1, base64_url_decode/1,
+-export([url_encode/1, base64_url_decode/1,
          base64_url_encode/1, ip_to_int/1]).
 
 
