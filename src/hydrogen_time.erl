@@ -1,6 +1,4 @@
 %%%-------------------------------------------------------------------
-%%% @author Sukumar Yethadka <sukumar@thinkapi.com>
-%%%
 %%% @doc hydrogen time
 %%%
 %%% Time and calendar library

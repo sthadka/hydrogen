@@ -1,6 +1,4 @@
 %%%-------------------------------------------------------------------
-%%% @author Sukumar Yethadka <sukumar@thinkapi.com>
-%%%
 %%% @doc hydrogen_convert
 %%%
 %%% Data type conversion library.

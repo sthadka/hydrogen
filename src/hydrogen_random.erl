@@ -1,6 +1,4 @@
 %%%-------------------------------------------------------------------
-%%% @author Sukumar Yethadka <sukumar@thinkapi.com>
-%%%
 %%% @doc hydrogen_random
 %%%
 %%% Sampling and randomization library
