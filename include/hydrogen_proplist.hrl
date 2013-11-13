@@ -1,15 +1,15 @@
 %% Proplist functions
--define(kv_new(),             hydrogen_proplist:new()).
--define(kv_insert(L, KV),     hydrogen_proplist:insert(L, KV)).
--define(kv_append(L, KV),     hydrogen_proplist:append(L, KV)).
--define(kv_update(L, KV),     hydrogen_proplist:update(L, KV)).
--define(kv_add_update(L, KV), hydrogen_proplist:add_update(L, KV)).
--define(kv_delete(L, K),      hydrogen_proplist:delete(L, K)).
--define(kv_delete_all(L, K),  hydrogen_proplist:delete_all(L, K)).
--define(kv_get(L, K),         hydrogen_proplist:get(L, K)).
--define(kv_get(L, K, D),      hydrogen_proplist:get(L, K, D)).
--define(kv_get_all(L, K),     hydrogen_proplist:get_all(L, K)).
--define(kv_sort(L),           hydrogen_proplist:sort(L)).
--define(kv_apply(L, F),       hydrogen_proplist:apply(L, F)).
--define(kv_keys(L),           hydrogen_proplist:keys(L)).
--define(kv_member(L, K),      hydrogen_proplist:member(L, K)).
+-define(plist_new(),             hydrogen_proplist:new()).
+-define(plist_insert(L, KV),     hydrogen_proplist:insert(L, KV)).
+-define(plist_append(L, KV),     hydrogen_proplist:append(L, KV)).
+-define(plist_update(L, KV),     hydrogen_proplist:update(L, KV)).
+-define(plist_add_update(L, KV), hydrogen_proplist:add_update(L, KV)).
+-define(plist_delete(L, K),      hydrogen_proplist:delete(L, K)).
+-define(plist_delete_all(L, K),  hydrogen_proplist:delete_all(L, K)).
+-define(plist_get(L, K),         hydrogen_proplist:get(L, K)).
+-define(plist_get(L, K, D),      hydrogen_proplist:get(L, K, D)).
+-define(plist_get_all(L, K),     hydrogen_proplist:get_all(L, K)).
+-define(plist_sort(L),           hydrogen_proplist:sort(L)).
+-define(plist_apply(L, F),       hydrogen_proplist:apply(L, F)).
+-define(plist_keys(L),           hydrogen_proplist:keys(L)).
+-define(plist_member(L, K),      hydrogen_proplist:member(L, K)).
