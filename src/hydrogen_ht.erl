@@ -36,7 +36,7 @@ put(#hydrogen_ht{name=Table}=TableData, Key, Value) ->
 get(#hydrogen_ht{name=Table}, Key) ->
     case ets:lookup(Table, Key) of
         [] ->
-            not_found;
+            undefined;
         [{Key, Value}] ->
             Value
     end.
