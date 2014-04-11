@@ -56,15 +56,5 @@ member() ->
     ?assert(?plist_member(proplist(), a)),
     ?assertNot(?plist_member(proplist(), x)).
 
-
-
-
-
-
-
-
-
-
-
 proplist() ->
     [{a, b}, {c, d}, {e, f}].

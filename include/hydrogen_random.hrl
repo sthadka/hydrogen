@@ -17,7 +17,3 @@
         hydrogen_random:random_gaussian(Mu, S).
 -define(RANDOM_UNIFORM(N),
         hydrogen_random:random_uniform(N)).
-
-
-
-
