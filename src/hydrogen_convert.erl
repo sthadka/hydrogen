@@ -17,7 +17,7 @@
          to_float/1
         ]).
 
--spec to_atom(atom() | list() | binary()) -> atom().
+-spec to_atom(atom() | string() | binary()) -> atom().
 to_atom(A) when is_atom(A) ->
     A;
 to_atom(L) when is_list(L) ->
@@ -25,14 +25,13 @@ to_atom(L) when is_list(L) ->
 to_atom(B) when is_binary(B) ->
     to_atom(B, utf8).
 
--spec to_atom(atom() | nonempty_string() | binary(), atom()) -> atom().
+-spec to_atom(atom() | string() | binary(), atom()) -> atom().
 to_atom(B, Encoding) when is_binary(B) ->
     ?B2A(B, Encoding);
 to_atom(Other, _Encoding) ->
     to_atom(Other).
 
--spec to_existing_atom(atom() | nonempty_string() | binary()) ->
-    atom() | no_return().
+-spec to_existing_atom(atom() | string() | binary()) -> atom().
 to_existing_atom(A) when is_atom(A) ->
     A;
 to_existing_atom(L) when is_list(L) ->
@@ -40,7 +39,8 @@ to_existing_atom(L) when is_list(L) ->
 to_existing_atom(B) when is_binary(B) ->
     to_existing_atom(B, utf8).
 
--spec to_existing_atom(atom() | list() | binary(), atom()) -> atom().
+-spec to_existing_atom(atom() | string() | binary(),
+                       latin1 | utf8 | unicode) -> atom().
 to_existing_atom(B, Encoding) when is_binary(B) ->
     case catch binary_to_existing_atom(B, Encoding) of
         {'EXIT', _} ->
@@ -51,7 +51,7 @@ to_existing_atom(B, Encoding) when is_binary(B) ->
 to_existing_atom(Other, _Encoding) ->
     to_existing_atom(Other).
 
--spec to_integer(integer() | binary() | list()) -> integer().
+-spec to_integer(integer() | binary() | string()) -> integer().
 to_integer(I) when is_integer(I) ->
     I;
 to_integer(B) when is_binary(B) ->
@@ -64,7 +64,7 @@ to_integer(L) when is_list(L) ->
             Int
     end.
 
--spec to_binary(binary() | list() | atom() | integer() | float()) -> binary().
+-spec to_binary(binary() | string() | atom() | integer() | float()) -> binary().
 to_binary(B) when is_binary(B) ->
     B;
 to_binary(L) when is_list(L) ->
@@ -83,7 +83,7 @@ to_list(A) when is_atom(A)    -> ?A2L(A);
 to_list(I) when is_integer(I) -> ?I2L(I);
 to_list(F) when is_float(F)   -> ?B2L(?F2B(F)).
 
--spec to_float(float() | binary() | integer() | [integer()] ) -> float().
+-spec to_float(float() | binary() | integer() | [float()] ) -> float().
 to_float(F) when is_float(F) ->
     F;
 to_float(B) when is_binary(B) ->
