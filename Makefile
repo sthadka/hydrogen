@@ -20,13 +20,13 @@ xref: compile
 	@${REBAR} skip_deps=true xref
 
 dialyzer:
-	@dialyzer --plt .honcho.plt -r apps \
+	@dialyzer --plt .honcho.plt --src src \
 		-Wrace_conditions -Wunderspecs -Wspecdiffs
 
 plt: compile
 	@dialyzer --output_plt .honcho.plt --build_plt --apps \
 		erts kernel stdlib crypto sasl ssl inets xmerl public_key compiler \
-		tools runtime_tools deps/*/ebin
+		tools runtime_tools deps/*/ebin ebin
 
 # Cleaning tasks:
 
