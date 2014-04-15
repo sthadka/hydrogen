@@ -9,16 +9,24 @@
 
 -include_lib("hydrogen.hrl").
 
--export([now/0,
+-export([now_micro/0, now_milli/0, now/0,
          to_datetime/1, to_date/1, to_timestamp/1,
          iso8601_to_ts/1]).
 
 -define(GREGORIAN_SECONDS_TO_UNIXTIMESTAMP_DIFFERENCE, 719528*24*3600).
 
+-spec now_micro() -> non_neg_integer().
+now_micro() ->
+    {MegaSeconds, Seconds, MicroSeconds} = os:timestamp(),
+    (MegaSeconds * 1000000 + Seconds) * 1000000 + MicroSeconds.
+
+-spec now_milli() -> non_neg_integer().
+now_milli() ->
+    now_micro() div 1000.
+
 -spec now() -> non_neg_integer().
 now() ->
-    {MegaSeconds, Seconds, _} = os:timestamp(),
-    MegaSeconds * 1000000 + Seconds.
+    now_micro() div 1000000.
 
 -spec to_datetime(non_neg_integer()) -> calendar:datetime().
 to_datetime(Timestamp) ->
