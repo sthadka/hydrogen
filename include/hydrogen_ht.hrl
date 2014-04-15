@@ -1,8 +1,7 @@
 %% Hash table functions
--define(HT_NEW(),               hydrogen_ht:new()).
 -define(HT_NEW(Ops),            hydrogen_ht:new(Ops)).
--define(HT_PUT(T, K, V),        hydrogen_ht:put(T, K, V)).
--define(HT_DEL(T),              hydrogen_ht:del(T)).
+-define(HT_NEW(Type, Ops),      hydrogen_ht:new(Type, Ops)).
+-define(HT_SET(T, K, V),        hydrogen_ht:set(T, K, V)).
 -define(HT_DEL(T, K),           hydrogen_ht:del(T, K)).
 -define(HT_GET(T, K),           hydrogen_ht:get(T, K)).
 -define(HT_RESET(T),            hydrogen_ht:reset(T)).

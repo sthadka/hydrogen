@@ -1,57 +1,85 @@
 %%%-------------------------------------------------------------------
 %%% @doc hydrogen hash table
 %%%
-%%% Simple hash table which uses ETS for storage
+%%% Simple hash table with configurable storage
+%%%
+%%% Note: The behaviours of some functions may not be idempotent based on used
+%%% hash table type, e.g. ets
 %%% @end
 %%%-------------------------------------------------------------------
 
 -module(hydrogen_ht).
 
--export([new/0, new/1, del/1, reset/1, to_list/1,
-         get/2, put/3, del/2]).
+-export([new/1, new/2, reset/1, to_list/1,
+         get/2, set/3, del/2]).
 
--record(hydrogen_ht, {name}).
+-record(hydrogen_ht, {type :: ht_type(),
+                      table :: table()}).
+
+-type ht_type() :: ets | dict.
+
+-type tid() :: pos_integer().
+-type ets() :: tid() | atom().
+-type table() :: ets() | dict().
 
 %% ------------------------------------------------------------------
 %% Function Definitions
 %% ------------------------------------------------------------------
--spec new() -> #hydrogen_ht{}.
-new() ->
-    #hydrogen_ht{name=ets:new(ht, [])}.
+-spec new(ht_type()) -> #hydrogen_ht{}.
+new(dict = Type) ->
+    Table = dict:new(),
+    #hydrogen_ht{type = Type, table = Table};
+new(ets = Type) ->
+    Table = ets:new(?MODULE, []),
+    #hydrogen_ht{type = Type, table = Table}.
 
--spec new(list()) -> #hydrogen_ht{}.
-new(Options) ->
-    #hydrogen_ht{name=ets:new(hd(Options), tl(Options))}.
+-spec new(ht_type(), list()) -> #hydrogen_ht{}.
+new(ets = Type, Options) ->
+    Table = ets:new(hd(Options), tl(Options)),
+    #hydrogen_ht{type = Type, table = Table};
+new(dict = Type, []) ->
+    new(Type).
 
--spec del(#hydrogen_ht{}) -> true.
-del(#hydrogen_ht{name=Table}) ->
-    ets:delete(Table).
-
--spec put(#hydrogen_ht{}, Key::term(), Val::term()) -> ok.
-put(#hydrogen_ht{name=Table}=TableData, Key, Value) ->
-    ets:insert(Table, {Key, Value}),
-    TableData.
+-spec set(#hydrogen_ht{}, Key::term(), Val::term()) -> ok.
+set(#hydrogen_ht{type = dict, table = Dict} = HT, Key, Val) ->
+    NewDict = dict:store(Key, Val, Dict),
+    HT#hydrogen_ht{table = NewDict};
+set(#hydrogen_ht{type = ets, table = Ets} = HT, Key, Val) ->
+    ets:insert(Ets, {Key, Val}),
+    HT.
 
 -spec get(#hydrogen_ht{}, Key::term()) -> Val::term() | error.
-get(#hydrogen_ht{name=Table}, Key) ->
-    case ets:lookup(Table, Key) of
+get(#hydrogen_ht{type = dict, table = Dict}, Key) ->
+    case dict:is_key(Key, Dict) of
+        true ->
+            dict:fetch(Key, Dict);
+        false ->
+            undefined
+    end;
+get(#hydrogen_ht{type = ets, table = Ets}, Key) ->
+    case ets:lookup(Ets, Key) of
         [] ->
             undefined;
-        [{Key, Value}] ->
-            Value
+        [{Key, Val}] ->
+            Val
     end.
 
 -spec del(#hydrogen_ht{}, Key::term()) -> ok.
-del(#hydrogen_ht{name=Table}=TableData, Key) ->
-    ets:delete(Table, Key),
-    TableData.
+del(#hydrogen_ht{type = dict, table = Dict} = HT, Key) ->
+    NewDict = dict:erase(Key, Dict),
+    HT#hydrogen_ht{table = NewDict};
+del(#hydrogen_ht{type = ets, table = Ets}, Key) ->
+    ets:delete(Ets, Key).
 
 -spec to_list(#hydrogen_ht{}) -> [{term(), term()}].
-to_list(#hydrogen_ht{name=Table}) ->
-    ets:tab2list(Table).
+to_list(#hydrogen_ht{type = dict, table = Dict}) ->
+    dict:to_list(Dict);
+to_list(#hydrogen_ht{type = ets, table = Ets}) ->
+    ets:tab2list(Ets).
 
-% TODO: Check if dropping the table and creating a new table it is faster
 -spec reset(#hydrogen_ht{}) -> true.
-reset(#hydrogen_ht{name=Table}=TableData) ->
-    ets:delete_all_objects(Table),
-    TableData.
+reset(#hydrogen_ht{type = dict}) ->
+    new(dict);
+reset(#hydrogen_ht{type = ets, table = Ets} = HT) ->
+    ets:delete_all_objects(Ets),
+    HT.
