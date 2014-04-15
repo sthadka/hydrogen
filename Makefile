@@ -44,6 +44,9 @@ allclean: depclean
 start: compile
 	erl -pa deps/*/ebin ebin
 
+qs: qc
+	erl -pa deps/*/ebin ebin
+
 doc:
 	$(REBAR) doc skip_deps=true
 
