@@ -48,7 +48,7 @@ to_timestamp(Datetime = {{_,_,_}, {_,_,_}}) ->
 
 %% Converts ISO 8601 format to timestamp
 %% Ex: 2013-07-15T09:45:49+0000 to 1373881549
--spec iso8601_to_ts(binary()) -> non_neg_integer().
+-spec iso8601_to_ts(binary() | string()) -> non_neg_integer().
 iso8601_to_ts(DateString) when is_binary(DateString) ->
     iso8601_to_ts(?TO_L(DateString));
 
