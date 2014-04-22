@@ -8,7 +8,7 @@
 -define(TO_TIMESTAMP(D),  hydrogen_time:to_timestamp(D)).
 
 %% Helper functions for time conversion into milliseconds
--define(SECONDS(S),       hydrogen_time:seconds(S)),
--define(MINUTES(S),       hydrogen_time:minutes(S)),
--define(HOURS(S),         hydrogen_time:hours(S)),
--define(DAYS(S),          hydrogen_time:days(S)),
+-define(SECONDS(S),       hydrogen_time:seconds(S)).
+-define(MINUTES(M),       hydrogen_time:minutes(M)).
+-define(HOURS(H),         hydrogen_time:hours(H)).
+-define(DAYS(D),          hydrogen_time:days(D)).
