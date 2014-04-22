@@ -13,6 +13,8 @@
          to_datetime/1, to_date/1, to_timestamp/1,
          iso8601_to_ts/1]).
 
+-export([seconds/1, minutes/1, hours/1, days/1]).
+
 -define(GREGORIAN_SECONDS_TO_UNIXTIMESTAMP_DIFFERENCE, 719528*24*3600).
 
 -spec now_micro() -> non_neg_integer().
@@ -57,6 +59,21 @@ iso8601_to_ts(DateString) when is_list(DateString) ->
         ymdhms_to_gregorian_seconds(
             parse_iso8601(DateString))).
 
+-spec seconds(float()) -> non_neg_integer().
+seconds(Seconds) ->
+    erlang:trunc(Seconds * 1000).
+
+-spec minutes(float()) -> non_neg_integer().
+minutes(Minutes) ->
+    seconds(Minutes * 60).
+
+-spec hours(float()) -> non_neg_integer().
+hours(Hours) ->
+    minutes(Hours * 60).
+
+-spec days(float()) -> non_neg_integer().
+days(Days) ->
+    hours(Days * 24).
 
 %%-------------------------------------------------------------------
 %% Internal helpers
