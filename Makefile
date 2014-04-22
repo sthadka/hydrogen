@@ -2,7 +2,7 @@ REBAR = @$(shell pwd)/rebar
 
 # Build tasks:
 
-all: compile
+all: xref
 
 dependencies:
 	@${REBAR} get-deps
