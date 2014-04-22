@@ -21,7 +21,8 @@
 -type tid() :: pos_integer().
 -type ets() :: tid() | atom().
 -type proplist() :: [tuple()].
--type table() :: ets() | proplist() | dict().
+-type tree() :: tuple().                        % TODO: Better specs
+-type table() :: proplist() | dict() | tree() | ets().
 
 %% ------------------------------------------------------------------
 %% Function Definitions
@@ -33,6 +34,9 @@ new(proplist = Type) ->
 new(dict = Type) ->
     Table = dict:new(),
     #hydrogen_ht{type = Type, table = Table};
+new(tree = Type) ->
+    Table = gb_trees:empty(),
+    #hydrogen_ht{type = Type, table = Table};
 new(ets = Type) ->
     Table = ets:new(?MODULE, []),
     #hydrogen_ht{type = Type, table = Table}.
@@ -41,6 +45,8 @@ new(ets = Type) ->
 new(proplist = Type, []) ->
     new(Type);
 new(dict = Type, []) ->
+    new(Type);
+new(tree = Type, []) ->
     new(Type);
 new(ets = Type, Options) ->
     Table = ets:new(hd(Options), tl(Options)),
@@ -53,6 +59,9 @@ set(#hydrogen_ht{type = proplist, table = PList} = HT, Key, Val) ->
 set(#hydrogen_ht{type = dict, table = Dict} = HT, Key, Val) ->
     NewDict = dict:store(Key, Val, Dict),
     HT#hydrogen_ht{table = NewDict};
+set(#hydrogen_ht{type = tree, table = Tree} = HT, Key, Val) ->
+    NewTree = gb_trees:enter(Key, Val, Tree),
+    HT#hydrogen_ht{table = NewTree};
 set(#hydrogen_ht{type = ets, table = Ets} = HT, Key, Val) ->
     ets:insert(Ets, {Key, Val}),
     HT.
@@ -64,6 +73,13 @@ get(#hydrogen_ht{type = dict, table = Dict}, Key) ->
     case dict:is_key(Key, Dict) of
         true ->
             dict:fetch(Key, Dict);
+        false ->
+            undefined
+    end;
+get(#hydrogen_ht{type = tree, table = Tree}, Key) ->
+    case gb_trees:is_defined(Key, Tree) of
+        true ->
+            gb_trees:get(Key, Tree);
         false ->
             undefined
     end;
@@ -82,6 +98,9 @@ del(#hydrogen_ht{type = proplist, table = PList} = HT, Key) ->
 del(#hydrogen_ht{type = dict, table = Dict} = HT, Key) ->
     NewDict = dict:erase(Key, Dict),
     HT#hydrogen_ht{table = NewDict};
+del(#hydrogen_ht{type = tree, table = Tree} = HT, Key) ->
+    NewTree = gb_trees:delete_any(Key, Tree),
+    HT#hydrogen_ht{table = NewTree};
 del(#hydrogen_ht{type = ets, table = Ets}, Key) ->
     ets:delete(Ets, Key).
 
@@ -90,6 +109,8 @@ to_list(#hydrogen_ht{type = proplist, table = PList}) ->
     PList;
 to_list(#hydrogen_ht{type = dict, table = Dict}) ->
     dict:to_list(Dict);
+to_list(#hydrogen_ht{type = tree, table = Tree}) ->
+    gb_trees:to_list(Tree);
 to_list(#hydrogen_ht{type = ets, table = Ets}) ->
     ets:tab2list(Ets).
 
