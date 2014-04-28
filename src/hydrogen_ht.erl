@@ -10,8 +10,12 @@
 
 -module(hydrogen_ht).
 
--export([new/1, new/2, reset/1, to_list/1,
-         get/2, set/3, del/2]).
+-export([new/1, new/2,
+         reset/1,
+         to_list/1,
+         get/2,
+         set/3,
+         del/2]).
 
 -record(hydrogen_ht, {type :: ht_type(),
                       table :: table()}).

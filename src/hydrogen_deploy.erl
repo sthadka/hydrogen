@@ -20,8 +20,7 @@
          find_module_file/1,
          code_change/3,
          old_code/1,
-         stuck_old_code/1
-        ]).
+         stuck_old_code/1]).
 
 reload_release(App) ->
     ok = add_paths("lib"),

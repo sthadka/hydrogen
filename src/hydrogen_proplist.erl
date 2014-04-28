@@ -8,10 +8,18 @@
 -module(hydrogen_proplist).
 
 -export([new/0,
-        insert/2, append/2, update/2, add_update/2, delete/2, delete_all/2,
-        get/2, get/3, get_all/2,
-        sort/1, apply/2,
-        keys/1, member/2]).
+         insert/2,
+         append/2,
+         update/2,
+         add_update/2,
+         delete/2,
+         delete_all/2,
+         get/2, get/3,
+         get_all/2,
+         sort/1,
+         apply/2,
+         keys/1,
+         member/2]).
 
 -type key_val() :: {any(), any()}.
 -type proplist() :: [key_val()].

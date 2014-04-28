@@ -9,8 +9,12 @@
 
 -include_lib("hydrogen.hrl").
 
--export([now_micro/0, now_milli/0, now/0,
-         to_datetime/1, to_date/1, to_timestamp/1,
+-export([now_micro/0,
+         now_milli/0,
+         now/0,
+         to_datetime/1,
+         to_date/1,
+         to_timestamp/1,
          iso8601_to_ts/1]).
 
 -export([seconds/1, minutes/1, hours/1, days/1]).

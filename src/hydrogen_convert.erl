@@ -14,8 +14,7 @@
          to_integer/1,
          to_binary/1,
          to_list/1,
-         to_float/1
-        ]).
+         to_float/1]).
 
 -spec to_atom(atom() | string() | binary()) -> atom().
 to_atom(A) when is_atom(A) ->

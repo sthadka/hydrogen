@@ -7,11 +7,14 @@
 
 -module(hydrogen_random).
 
--export([shuffle/1, pick/1, sample/2,
-        random_in_range/2,
-        weighted_random_selector/1, weighted_random_selector/2,
-        random_normal/0, random_gaussian/2, random_uniform/1
-        ]).
+-export([shuffle/1,
+         pick/1,
+         sample/2,
+         random_in_range/2,
+         weighted_random_selector/1, weighted_random_selector/2,
+         random_normal/0,
+         random_gaussian/2,
+         random_uniform/1]).
 
 %% @doc Takes a list and randomly shuffles it. Relies on random:uniform
 %% inspired by: http://www.trapexit.org/RandomShuffle
