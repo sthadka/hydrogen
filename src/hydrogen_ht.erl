@@ -26,7 +26,7 @@
 -type ets() :: tid() | atom().
 -type proplist() :: [tuple()].
 -type tree() :: tuple().                        % TODO: Better specs
--type table() :: proplist() | dict:dict() | tree() | ets().
+-type table() :: proplist() | tree() | ets().
 
 %% ------------------------------------------------------------------
 %% Function Definitions
