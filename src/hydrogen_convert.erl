@@ -7,7 +7,7 @@
 
 -module(hydrogen_convert).
 
--include_lib("hydrogen.hrl").
+-include_lib("hydrogen_convert.hrl").
 
 -export([to_atom/1, to_atom/2,
          to_existing_atom/1, to_existing_atom/2,

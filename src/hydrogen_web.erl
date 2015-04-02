@@ -88,7 +88,6 @@ base64_url_decode_char($_) ->
 base64_url_decode_char(Char) ->
     Char.
 
-
 base64_pad(String) ->
     Length = length(String),
 
@@ -98,7 +97,6 @@ base64_pad(String) ->
                 N -> 4 - N
             end,
     string:left(String, Length + ToPad, $=).
-
 
 base64_url_encode_char($+) ->
     $-;

@@ -5,6 +5,6 @@
   {registered, []},
   {applications, [kernel,
                   stdlib]},
-  {mod, { hydrogen_app, []}},
+  {mod, {hydrogen_app, []}},
   {env, []}
  ]}.

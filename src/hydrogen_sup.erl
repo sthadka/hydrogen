@@ -1,6 +1,4 @@
-
 -module(hydrogen_sup).
-
 -behaviour(supervisor).
 
 %% API

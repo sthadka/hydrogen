@@ -7,7 +7,7 @@
 
 -module(hydrogen_time).
 
--include_lib("hydrogen.hrl").
+-include_lib("hydrogen_convert.hrl").
 
 -export([now_micro/0,
          now_milli/0,

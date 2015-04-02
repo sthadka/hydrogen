@@ -7,8 +7,6 @@
 
 -module(hydrogen_cluster).
 
--include("hydrogen_convert.hrl").
-
 -export([nodefinder/0]).
 
 nodefinder() ->

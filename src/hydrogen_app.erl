@@ -1,13 +1,12 @@
 -module(hydrogen_app).
-
 -behaviour(application).
 
-%% Application callbacks
+% Application callbacks
 -export([start/2, stop/1]).
 
-%% ===================================================================
-%% Application callbacks
-%% ===================================================================
+%%-------------------------------------------------------------------
+% Application callbacks
+%%-------------------------------------------------------------------
 
 start(_StartType, _StartArgs) ->
     hydrogen_sup:start_link().

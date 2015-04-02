@@ -3,27 +3,27 @@
 
 -define(LOGGER, error_logger).
 
--define(DEBUG_MSG,      info_msg).
--define(INFO_MSG,       info_msg).
--define(NOTICE_MSG,     warning_msg).
--define(WARNING_MSG,    warning_msg).
--define(ERROR_MSG,      error_msg).
--define(CRITICAL_MSG,   error_msg).
--define(ALERT_MSG,      error_msg).
--define(EMERGENCY_MSG,  error_msg).
+-define(DEBUG_MSG,     info_msg).
+-define(INFO_MSG,      info_msg).
+-define(NOTICE_MSG,    warning_msg).
+-define(WARNING_MSG,   warning_msg).
+-define(ERROR_MSG,     error_msg).
+-define(CRITICAL_MSG,  error_msg).
+-define(ALERT_MSG,     error_msg).
+-define(EMERGENCY_MSG, error_msg).
 
 -else.
 
 -define(LOGGER, lager).
 
--define(DEBUG_MSG,      debug).
--define(INFO_MSG,       info).
--define(NOTICE_MSG,     notice).
--define(WARNING_MSG,    warning).
--define(ERROR_MSG,      error).
--define(CRITICAL_MSG,   critical).
--define(ALERT_MSG,      alert).
--define(EMERGENCY_MSG,  emergency).
+-define(DEBUG_MSG,     debug).
+-define(INFO_MSG,      info).
+-define(NOTICE_MSG,    notice).
+-define(WARNING_MSG,   warning).
+-define(ERROR_MSG,     error).
+-define(CRITICAL_MSG,  critical).
+-define(ALERT_MSG,     alert).
+-define(EMERGENCY_MSG, emergency).
 
 -endif. %% USE_ERROR_LOGGER
 
