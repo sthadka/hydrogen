@@ -1,7 +1,7 @@
 -module(hydrogen_proplist_tests).
 
 -include_lib("eunit/include/eunit.hrl").
--include_lib("hydrogen.hrl").
+-include_lib("include/hydrogen.hrl").
 
 hydrogen_proplist_test_() ->
     [?_test(insert()),
@@ -17,44 +17,44 @@ hydrogen_proplist_test_() ->
      ?_test(member())].
 
 insert() ->
-    ?assertEqual([{k, v} | proplist()], ?plist_insert(proplist(), {k, v})).
+    ?assertEqual([{k, v} | proplist()], ?PLIST_INSERT(proplist(), {k, v})).
 
 append() ->
     ?assertEqual([{a, b}, {c, d}, {e, f}, {k, v}],
-                 ?plist_append(proplist(), {k, v})).
+                 ?PLIST_APPEND(proplist(), {k, v})).
 
 update() ->
-    ?assertEqual([{a, b}, {c, x}, {e, f}], ?plist_update(proplist(), {c, x})).
+    ?assertEqual([{a, b}, {c, x}, {e, f}], ?PLIST_UPDATE(proplist(), {c, x})).
 
 add_update() ->
-    ?assertEqual([{a, b}, {c, x}, {e, f}], ?plist_add_update(proplist(), {c, x})),
+    ?assertEqual([{a, b}, {c, x}, {e, f}], ?PLIST_ADD_UPDATE(proplist(), {c, x})),
     ?assertEqual([{a, b}, {c, d}, {e, f}, {k, v}],
-                 ?plist_add_update(proplist(), {k, v})).
+                 ?PLIST_ADD_UPDATE(proplist(), {k, v})).
 
 delete() ->
-    ?assertEqual([{a, b}, {e, f}], ?plist_delete(proplist(), c)).
+    ?assertEqual([{a, b}, {e, f}], ?PLIST_DELETE(proplist(), c)).
 
 get_test() ->
-    ?assertEqual(f, ?plist_get(proplist(), e)),
-    ?assertEqual(default, ?plist_get(proplist(), k, default)).
+    ?assertEqual(f, ?PLIST_GET(proplist(), e)),
+    ?assertEqual(default, ?PLIST_GET(proplist(), k, default)).
 
 get_all() ->
-    ?assertEqual([b, v], ?plist_get_all(?plist_insert(proplist(), {a, v}), a)).
+    ?assertEqual([b, v], ?PLIST_GET_ALL(?PLIST_INSERT(proplist(), {a, v}), a)).
 
 sort() ->
-    ?assertEqual(proplist(), ?plist_sort([{c, d}, {e, f}, {a, b}])).
+    ?assertEqual(proplist(), ?PLIST_SORT([{c, d}, {e, f}, {a, b}])).
 
 apply() ->
     Fs = [fun (L) -> [{K+1, V} || {K, V} <- L] end],
     ?assertEqual([{1, 1}, {2, 2}, {3, 3}],
-                 ?plist_apply([{0, 1}, {1, 2}, {2, 3}], Fs)).
+                 ?PLIST_APPLY([{0, 1}, {1, 2}, {2, 3}], Fs)).
 
 keys() ->
-    ?assertEqual([a, c, e], ?plist_keys(proplist())).
+    ?assertEqual([a, c, e], ?PLIST_KEYS(proplist())).
 
 member() ->
-    ?assert(?plist_member(proplist(), a)),
-    ?assertNot(?plist_member(proplist(), x)).
+    ?assert(?PLIST_MEMBER(proplist(), a)),
+    ?assertNot(?PLIST_MEMBER(proplist(), x)).
 
 proplist() ->
     [{a, b}, {c, d}, {e, f}].
