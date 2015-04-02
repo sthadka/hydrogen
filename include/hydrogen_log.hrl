@@ -58,3 +58,23 @@
 -define(LOG_EMERGENCY(P, M, L), ?LOG(?LOGGER, ?EMERGENCY_MSG, "[~ts] " ++ M, [P | L])).
 
 -define(LOG(Logger, Severity, Msg, Args), Logger:Severity(Msg, Args)).
+
+%% Print module, line number, variable name and variable value
+%% Based on http://blog.rusty.io/2011/01/13/beautiful-erlang-print/
+-ifdef(EUNIT).
+
+-define(LOG_VAR(Var), ?debugFmt("~p:~p~n~p~n"
+                                "--------------------------------------------------------------------------------"
+                                "~n~p~n"
+                                "--------------------------------------------------------------------------------",
+                                [?MODULE, ?LINE, ??Var, Var])).
+-else.
+
+-define(LOG_VAR(Var), ?LOG(?LOGGER, ?DEBUG_MSG,
+                           "~p:~p~n~p~n"
+                           "--------------------------------------------------------------------------------"
+                           "~n~p~n"
+                           "--------------------------------------------------------------------------------",
+                           [?MODULE, ?LINE, ??Var, Var])).
+
+-endif. %% EUNIT

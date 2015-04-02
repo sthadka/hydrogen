@@ -1,6 +1,6 @@
 -module(hydrogen_convert_tests).
 -include_lib("eunit/include/eunit.hrl").
--include("hydrogen.hrl").
+-include_lib("include/hydrogen.hrl").
 
 hydrogen_convert_test_() ->
     [?_test(to_atom()),
