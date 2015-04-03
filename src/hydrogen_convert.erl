@@ -80,6 +80,7 @@ to_list(L) when is_list(L)    -> L;
 to_list(B) when is_binary(B)  -> ?B2L(B);
 to_list(A) when is_atom(A)    -> ?A2L(A);
 to_list(I) when is_integer(I) -> ?I2L(I);
+% TODO: Try to use a better way to translate floats
 to_list(F) when is_float(F)   -> ?B2L(?F2B(F)).
 
 -spec to_float(float() | binary() | integer() | [float()] ) -> float().
