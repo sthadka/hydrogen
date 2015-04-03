@@ -7,7 +7,9 @@
 
 -module(hydrogen_cluster).
 
--export([nodefinder/0]).
+-export([nodes/0]).
 
-nodefinder() ->
-    [node() | nodes()].
+%% @doc Get a list of all the nodes in the cluster, including current one.
+-spec nodes() -> [node()].
+nodes() ->
+    [node() | erlang:nodes()].
