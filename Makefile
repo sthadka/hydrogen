@@ -61,4 +61,4 @@ qs: qc
 doc:
 	@$(REBAR) skip_deps=true doc
 
-.PHONY: all test dialyzer clean allclean doc release qc qs start compile xref
+.PHONY: all test dialyzer clean allclean doc release qc qs start compile xref deps
