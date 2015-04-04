@@ -32,20 +32,39 @@ Data type conversion library that you can use to cast data to a specific data
 type. It tries its best or dies trying.
 
 ```
-2> hydrogen_convert:to_list(<<"binary">>).
-"binary"
-3> hydrogen_convert:to_list(atom).
-"atom"
-4> hydrogen_convert:to_list(10).
-"10"
+1> hydrogen_convert:to_float(12.35).
+12.35
+2> hydrogen_convert:to_float(<<"12.35">>).
+12.35
+3> hydrogen_convert:to_float(12).
+12.0
+4> hydrogen_convert:to_float("12.35").
+12.35
+5> hydrogen_convert:to_float("test").
+** exception throw: {hydrogen,convert,not_a_valid_float,[{list,"test"}]}
+     in function  hydrogen_convert:to_float/1 (src/hydrogen_convert.erl, line 98)
 ```
 
 #### hydrogen_deploy
+Helper functions to detect changed modules and deploy them.
+
 #### hydrogen_ht
+Hash table helper. Consistent access to different storage types in erlang.
+
 #### hydrogen_node
+Node helper functions.
+
 #### hydrogen_proplist
+Provides consistent interface to proplist, with some additional helpers.
+
 #### hydrogen_random
-#### hydrogen_sup
+Helpers for sampling, shuffling and picking random numbers.
+
 #### hydrogen_time
+Time conversion helpers.
+
 #### hydrogen_web
+Helpers functions for working with web resources.
+
 #### hydrogen_cluster
+Provides useful functions for managing a cluster.
