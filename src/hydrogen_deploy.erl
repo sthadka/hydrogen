@@ -8,6 +8,8 @@
 
 -module(hydrogen_deploy).
 
+%% TODO: Handle different folder structures apps, lib etc.
+
 -export([reload_release/1,
          reload_app/1,
          load_app/1,

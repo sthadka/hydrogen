@@ -10,6 +10,8 @@
 
 -module(hydrogen_ht).
 
+%% TODO: Maybe have ets as default and have rest storage types as options
+
 -export([new/1, new/2,
          reset/1,
          to_list/1,
