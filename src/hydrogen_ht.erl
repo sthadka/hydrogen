@@ -22,13 +22,13 @@
 -record(hydrogen_ht, {type :: ht_type(),
                       table :: table()}).
 
--type ht_type() :: ets | proplist | dict.
+-type ht_type() :: ets | proplist | dict | tree.
 
 -type tid() :: pos_integer().
 -type ets() :: tid() | atom().
 -type proplist() :: [tuple()].
--type tree() :: tuple().                        % TODO: Better specs
--type table() :: proplist() | tree() | ets().
+-type tree() :: gb_trees:tree().
+-type table() :: proplist() | tree() | ets() | dict:dict().
 
 %% ------------------------------------------------------------------
 %% Function Definitions
@@ -58,7 +58,7 @@ new(ets = Type, Options) ->
     Table = ets:new(hd(Options), tl(Options)),
     #hydrogen_ht{type = Type, table = Table}.
 
--spec set(#hydrogen_ht{}, Key::term(), Val::term()) -> ok.
+-spec set(#hydrogen_ht{}, Key::term(), Val::term()) -> #hydrogen_ht{}.
 set(#hydrogen_ht{type = proplist, table = PList} = HT, Key, Val) ->
     NewPList = hydrogen_proplist:add_update(PList, {Key, Val}),
     HT#hydrogen_ht{table = NewPList};
@@ -97,7 +97,7 @@ get(#hydrogen_ht{type = ets, table = Ets}, Key) ->
             Val
     end.
 
--spec del(#hydrogen_ht{}, Key::term()) -> ok.
+-spec del(#hydrogen_ht{}, Key::term()) -> #hydrogen_ht{}.
 del(#hydrogen_ht{type = proplist, table = PList} = HT, Key) ->
     NewPList = hydrogen_proplist:delete(PList, Key),
     HT#hydrogen_ht{table = NewPList};
@@ -120,7 +120,7 @@ to_list(#hydrogen_ht{type = tree, table = Tree}) ->
 to_list(#hydrogen_ht{type = ets, table = Ets}) ->
     ets:tab2list(Ets).
 
--spec reset(#hydrogen_ht{}) -> true.
+-spec reset(#hydrogen_ht{}) -> #hydrogen_ht{}.
 reset(#hydrogen_ht{type = ets, table = Ets} = HT) ->
     ets:delete_all_objects(Ets),
     HT;
