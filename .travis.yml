@@ -1,7 +1,8 @@
+sudo: false
 language: erlang
 notifications:
   email: false
 otp_release:
-  - 17.4
-  - 17.3
-  - R16B03-1
+  - 18.1
+  - 17.5
+script: "./rebar3 compile && ./rebar3 eunit"
