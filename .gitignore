@@ -1,6 +1,6 @@
 .eunit
-deps
-ebin
 *.o
 *.beam
 *.plt
+_build
+rebar.lock

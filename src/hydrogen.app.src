@@ -1,7 +1,6 @@
 {application, hydrogen,
- [
-  {description, ""},
-  {vsn, "0.1"},
+ [{description, "Erlang library for commonly used functions"},
+  {vsn, git},
   {registered, []},
   {applications, [kernel,
                   stdlib]},
